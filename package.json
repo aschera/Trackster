@@ -1,0 +1,17 @@
+{
+  "name": "teacozy",
+  "version": "1.0.0",
+  "description": "tea webpage",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss resources/css/style.css -w"
+  },
+  "author": "Christina Bögh",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.5.3"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
