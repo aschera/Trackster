@@ -14,7 +14,7 @@ XML: /2.0/?method=track.search&track=Believe&api_key=YOUR_API_KEY
 
 /* run the click event only if the page has loaded*/
 $(document).ready(function(){
-  $('#search-button').click(clicked)
+  $('#search-button').click(clicked);
 });
 
 /* do something when a user clicks the button*/
@@ -30,25 +30,37 @@ var Trackster = {};
   Append each "row" to the container in the body to display all tracks. 
 */
 Trackster.renderTracks = function(tracks) {
+
+  console.log(tracks);
   let list = tracks.results.trackmatches.track;
+
+  $('#track-list').empty();
+
   for(let i = 0; i < list.length; i++){
-    let $data = $(
-    '<div id="track-list" class="row">
-    <div class="list-item  col-xs-1 col-xs-offset-2">
-        <a href="
-    ' 
-    + 
-    list.url
+   let test = 'test';
+
+    $('#track-list').append
+    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
     +
-    '
-    https://youtu.be/eI_O5_tJ1hA" class="fa fa-play-circle-o"></a>
-    </div>
-    <div class="list-item  col-xs-1">');
-
-
-
-    
-    $('#track-list').append($data);
+    list[i].url
+    +
+    '" class="fa fa-play-circle-o"></a></div><div class="list-item  col-xs-1">'
+    +
+    '1'
+    +
+    '</div><div class="list-item col-xs-3">'
+    +
+    list[i].name
+    +
+    '</div><div class="list-item col-xs-3">'
+    +
+    list[i].artist
+    +
+    '</div><div class="list-item col-xs-2">'
+    +
+    list[i].listeners
+    +
+    '</div></div>');
   }
 };
 
@@ -61,7 +73,9 @@ Trackster.searchTracksByTitle = function(title) {
   let searchTrackUrl = "/2.0/?method=track.search&track="+title+"&api_key=2bbe973ecc284f94d17812d4bb225063&format=json";
 
   $.get(baseurl+searchTrackUrl, function(data){
+
     Trackster.renderTracks(data);
+    $('.search__bar').val('');
 });
 
 };
