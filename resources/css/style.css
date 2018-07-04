@@ -11,11 +11,15 @@ html {
   /* apply a natural box layout model to all elements, but allowing components to change */
   font-size: 100%; }
 
+.container-fluid, .row, .col {
+  margin: 0;
+  padding: 0; }
+
 h1 {
   color: #ff00ab;
   font-family: Righteous;
   font-size: 2.5rem;
-  margin: 0; }
+  margin: 2rem 1rem; }
 
 p {
   padding: 0;
@@ -26,49 +30,37 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem; }
-  .list-headings p {
-    color: white; }
-  .list-headings ul {
-    display: flex;
-    justify-content: space-between; }
-    .list-headings ul li {
-      display: inline;
-      padding: 0 2rem; }
+  color: white; }
+
+#track-list {
+  color: #4a4a4a;
+  border-bottom: 1px solid #cccccc; }
+
+.list-item {
+  padding: 0.5rem; }
 
 .container {
   width: 900px;
   margin: 0 auto; }
 
-header {
+.top-header {
   background-color: #23023f; }
 
-.top-header {
-  display: flex;
-  flex: row wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem; }
+.search__bar {
+  border-radius: 19px;
+  text-align: center;
+  line-height: 2.5rem;
+  width: 10rem;
+  margin-top: 2rem;
+  margin-right: 1rem; }
 
-.search {
-  margin-left: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .search__bar {
-    margin-right: .625rem;
-    padding: .4rem;
-    border-radius: 19px;
-    text-align: center; }
-  .search__button,
-  .search input[type="button" i]::-webkit-file-upload-button,
-  .search button {
-    font-size: 1.2rem;
-    width: 4rem;
-    margin-right: .625rem;
-    padding: .5rem;
-    border-radius: 19px;
-    text-align: center;
-    background-color: #ff00ab;
-    color: #22013f;
-    border: none; }
+#search-button {
+  font-size: 2rem;
+  width: 4rem;
+  margin-top: 2rem;
+  padding: .4rem;
+  border-radius: 19px;
+  text-align: center;
+  background-color: #ff00ab;
+  color: #22013f;
+  border: none; }

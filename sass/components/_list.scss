@@ -3,20 +3,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-
-    & p {
-        color: $text-color-light;
-    }
-
-    & ul {
-        display: flex;
-        justify-content: space-between;
-        
-        & li {
-            display: inline;
-            padding: 0 2rem;
-        }
-    }
+    color: $text-color-light;
 }
 
+#track-list{
+    color: $text-color;
+    border-bottom: 1px solid $line-color;
+}
+
+.list-item {
+    padding: 0.5rem;
+}

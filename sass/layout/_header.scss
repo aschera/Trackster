@@ -1,40 +1,27 @@
-header {
-    background-color: $tertiary-color;
-}
+
 
 .top-header {
-    display: flex;
-    flex: row wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
+    background-color: $tertiary-color;
+   
 }
 
-.search {
-    margin-left: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &__bar{
-        margin-right: .625rem;
-        padding: .4rem;
+.search__bar{
         border-radius: 19px;
         text-align: center;
-        
-    }
-    
-    &__button,
-    input[type="button" i]::-webkit-file-upload-button, 
-    button {
-        font-size:1.2rem;
+        line-height:2.5rem;
+        width: 10rem;
+        margin-top: 2rem;
+        margin-right:1rem;
+}
+
+#search-button{
+        font-size:2rem;
         width:4rem;
-        margin-right: .625rem;
-        padding: .5rem;
+        margin-top: 2rem;
+        padding: .4rem;
         border-radius: 19px;
         text-align: center;
         background-color: #ff00ab;
         color: #22013f;
         border: none;
-    }
 }
