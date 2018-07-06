@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./resources/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./resources/js/trackster.js"></script>
@@ -21,13 +22,13 @@
     <header>
         <div class="top-header container-fluid">
             <!-- start wrapper-->
-            <div class="row">
-                <!-- start row-->
-                <h1 class="col-xs-7 col-xs-offset-1">trackster</h1>
-                <input class="search search__bar col-xs-2" id="search-input" type="text" placeholder="Watcha looking for?">
-                <button class="search__button fa fa-search col-xs-1" id="search-button"></button>
-            </div>
-            <!-- end row-->
+            <div class="row"><!-- start row-->
+                <h1 class="col-xs-4 col-md-7 col-xs-offset-1 col-md-offset-1">trackster</h1>
+                <div class="col-xs-3 search">
+                    <input class="search__bar" id="search-input" type="text" placeholder="Watcha looking for?">
+                    <button class="search__button fa fa-search" id="search-button"></button>
+                </div>
+            </div><!-- end row-->
         </div>
         <!-- end wrapper-->
 
@@ -42,14 +43,24 @@
                 <div class="list-item col-xs-1">
                     #
                 </div>
-                <div class="list-item  col-xs-3">
-                    Song
+                <div class="list-item  col-xs-3" id="song-heading">
+                    Song 
+                    <button class="fas fa-caret-down" id="sortButton1a"></button>
+                    <button class="fas fa-caret-up" id="sortButton1b"></button>
+                    
                 </div>
                 <div class="list-item  col-xs-3" id="artist-heading">
                     Artist
+                    <button class="fas fa-caret-down" id="sortButton2a"></button>
+                    <button class="fas fa-caret-up" id="sortButton2b"></button>
+                    
+                    
                 </div>
-                <div class="list-item  col-xs-2">
+                <div class="list-item  col-xs-2" id="popularity-heading">
                     Popularity
+                    <button class="fas fa-caret-down" id="sortButton3a"></button>
+                    <button class="fas fa-caret-up" id="sortButton3b"></button>
+                    
                 </div>
             </div>
             <!-- end row -->

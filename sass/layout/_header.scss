@@ -5,7 +5,12 @@
     background-color: $tertiary-color;
    
 }
-
+.search {
+        width: 300px;
+        vertical-align: middle;
+        white-space: nowrap;
+        position: relative;
+}
 .search__bar{
         border-radius: 19px;
         text-align: center;
@@ -13,6 +18,8 @@
         width: 10rem;
         margin-top: 2rem;
         margin-right:1rem;
+        float:left;
+        display: inline;
 }
 
 #search-button{
@@ -25,4 +32,6 @@
         background-color: #ff00ab;
         color: #22013f;
         border: none;
+        float:left;
+        display: inline;
 }

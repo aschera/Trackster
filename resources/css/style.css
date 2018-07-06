@@ -48,9 +48,31 @@ p {
     height: 3.5rem;
     line-height: 2rem;
     display: inline-block; }
-  #track-list .fa-play-circle-o {
+  #track-list a {
     color: #ff00ab;
     font-size: 2rem; }
+
+#song-heading,
+#artist-heading,
+#popularity-heading {
+  cursor: pointer; }
+
+#sortButton1a, #sortButton1b,
+#sortButton2a, #sortButton2b,
+#sortButton3a, #sortButton3b {
+  font-size: 1rem;
+  background-color: none;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0 0.3rem 0 0;
+  padding: 0;
+  text-align: center;
+  background-color: transparent;
+  color: #ff00ab;
+  border: none;
+  float: left;
+  display: inline; }
 
 /* ********** Grid ********** */
 .container {
@@ -61,13 +83,21 @@ p {
 .top-header {
   background-color: #23023f; }
 
+.search {
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative; }
+
 .search__bar {
   border-radius: 19px;
   text-align: center;
   line-height: 2.5rem;
   width: 10rem;
   margin-top: 2rem;
-  margin-right: 1rem; }
+  margin-right: 1rem;
+  float: left;
+  display: inline; }
 
 #search-button {
   font-size: 2rem;
@@ -78,4 +108,19 @@ p {
   text-align: center;
   background-color: #ff00ab;
   color: #22013f;
-  border: none; }
+  border: none;
+  float: left;
+  display: inline; }
+
+.arrow {
+  font-size: 2rem;
+  width: 4rem;
+  margin-top: 2rem;
+  padding: .4rem;
+  border-radius: 19px;
+  text-align: center;
+  background-color: #ff00ab;
+  color: #22013f;
+  border: none;
+  float: left;
+  display: inline; }

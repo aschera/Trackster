@@ -21,8 +21,31 @@
         line-height: 2rem;
         display: inline-block;
     }
-    & .fa-play-circle-o {
+    & a {
         color:  #ff00ab;
         font-size:2rem;
     }
+}
+#song-heading,
+#artist-heading,
+#popularity-heading{
+    cursor: pointer;
+}
+
+#sortButton1a,#sortButton1b,
+#sortButton2a,#sortButton2b,
+#sortButton3a,#sortButton3b, {
+        font-size: 1rem;
+        background-color: none;
+        border: none;
+        appearance: none;
+        -webkit-appearance: none;
+        margin:0 0.3rem 0 0;
+        padding:0;
+        text-align: center;
+        background-color: transparent;
+        color: #ff00ab;
+        border: none;
+        float:left;
+        display: inline;
 }

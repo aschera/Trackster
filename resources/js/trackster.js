@@ -17,12 +17,12 @@ JSON: /2.0/?method=album.search&album=believe&api_key=YOUR_API_KEY&format=json
 XML: /2.0/?method=album.search&album=believe&api_key=YOUR_API_KEY
 */
 
-
+// Variables
 var list;
 var Trackster = {};
+var filter = {artist:'ascending', name:'ascending', listeners:'ascending'}
 
-
-
+// ******************************************************************* //
 
 /* run the click event only if the page has loaded*/
 $(document).ready(function(){
@@ -38,22 +38,44 @@ $(document).ready(function(){
     }
   });
 
+//hid the descendant buttons
+$('#sortButton1b').hide();
+$('#sortButton2b').hide();
+$('#sortButton3b').hide();
+
+
+
+//$( "#foo" ).toggle( display );
   $('#artist-heading').click(sortByArtist);
+  $('#song-heading').click(sortBySong);
+  $('#popularity-heading').click(sortByPopularity);
 });
+
+// ******************************************************************* //
 
 /* do something when a user clicks the button*/
 function clicked() {
   let query = $('.search__bar').val();
   Trackster.searchTracksByTitle(query);
 }
+// ******************************************************************* //
 
-
-
-/* filter */
-function sortByArtist() {
-  var $t = list.sort((a, b) => b.artist.localeCompare(a.artist));
-  console.log($t);
-  $('#track-list').empty();
+/* filter popularity */
+function sortByPopularity() {
+  if(filter.listeners ==='ascending'){
+    var $t = list.sort((a, b) => a.listeners - b.listeners); // For ascending sort
+    filter.listeners = 'descending';
+    $('#sortButton3a').show();
+    $('#sortButton3b').hide();
+  }
+  else if (filter.listeners ==='descending'){
+    var $t = list.sort((a, b) => b.listeners - a.listeners); // For descending sort  
+    filter.listeners = 'ascending';
+    $('#sortButton3b').show();
+    $('#sortButton3a').hide();
+  }
+  list = $t; // add newly sorted list to the current list.
+  $('#track-list').empty(); // empty the DOM list items.
   
   for(let i = 0; i < $t.length; i++){
     var string = numeral($t[i].listeners).format('0,0');
@@ -62,7 +84,52 @@ function sortByArtist() {
     +
     $t[i].url
     +
-    '" class="fa fa-play-circle-o"></a></div><div class="list-item  col-xs-1">'
+    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
+    +
+    '1'
+    +
+    '</div><div class="list-item col-xs-3">'
+    +
+    $t[i].name
+    +
+    '</div><div class="list-item col-xs-3">'
+    +
+    $t[i].artist
+    +
+    '</div><div class="list-item col-xs-2">'
+    +
+    string
+    +
+    '</div></div>');
+  }
+}
+// ******************************************************************* //
+
+/* filter songs */
+function sortBySong() {
+  if(filter.name ==='ascending'){
+    var $t = list.sort((a, b) => a.name.localeCompare(b.name));
+    filter.name = 'descending';
+    $('#sortButton1b').show();
+    $('#sortButton1a').hide();
+  }
+  else if (filter.name ==='descending'){
+    var $t = list.sort((a, b) => b.name.localeCompare(a.name));
+    filter.name = 'ascending';
+    $('#sortButton1a').show();
+    $('#sortButton1b').hide();
+  }
+  list = $t; // add newly sorted list to the current list.
+  $('#track-list').empty(); // empty the DOM list items.
+  
+  for(let i = 0; i < $t.length; i++){
+    var string = numeral($t[i].listeners).format('0,0');
+  $('#track-list').append
+    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
+    +
+    $t[i].url
+    +
+    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
     +
     '1'
     +
@@ -82,6 +149,51 @@ function sortByArtist() {
   }
 }
 
+// ******************************************************************* //
+/* filter Artist */
+function sortByArtist() {
+  if(filter.artist ==='ascending'){
+    var $t = list.sort((a, b) => a.artist.localeCompare(b.artist));
+    filter.artist = 'descending';
+    $('#sortButton2b').show();
+    $('#sortButton2a').hide();
+  }
+  else if (filter.artist ==='descending'){
+    var $t = list.sort((a, b) => b.artist.localeCompare(a.artist));
+    filter.artist = 'ascending';
+    $('#sortButton2a').show();
+    $('#sortButton2b').hide();
+  }
+  list = $t; // add newly sorted list to the current list.
+  $('#track-list').empty(); // empty the DOM list items.
+  
+  for(let i = 0; i < $t.length; i++){
+    var string = numeral($t[i].listeners).format('0,0');
+  $('#track-list').append
+    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
+    +
+    $t[i].url
+    +
+    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
+    +
+    '1'
+    +
+    '</div><div class="list-item col-xs-3">'
+    +
+    $t[i].name
+    +
+    '</div><div class="list-item col-xs-3">'
+    +
+    $t[i].artist
+    +
+    '</div><div class="list-item col-xs-2">'
+    +
+    string
+    +
+    '</div></div>');
+  }
+}
+// ******************************************************************* //
 
 /*
   Given an array of track data, create the HTML for a Bootstrap row for each.
@@ -100,7 +212,7 @@ Trackster.renderTracks = function(tracks) {
     +
     list[i].url
     +
-    '" class="fa fa-play-circle-o"></a></div><div class="list-item  col-xs-1">'
+    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
     +
     '1'
     +
