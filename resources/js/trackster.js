@@ -34,7 +34,9 @@ $(document).ready(function(){
   $('#sortButton1b').hide();
   $('#sortButton2b').hide();
   $('#sortButton3b').hide();
- 
+
+  // error msg
+  $('#error-search-msg').hide();
  
   // Filter-buttons
   $('#artist-heading').click(sortByArtist);
@@ -90,40 +92,49 @@ var Trackster = {
   }
 };
 
-
-
 // input search query is passed to aPI and a list of song titles is returned.
 Trackster.searchTracksByTitle = function(title) {
   $('.empty-search-msg').hide();
-  let $loadingspinner = $('.fa-spinner').hide();
-  $loadingspinner.show();
+  $('.fa-spinner').show();
+
   let baseurl= 'http://ws.audioscrobbler.com/';
   let searchTrackUrl = "/2.0/?method=track.search&track="+title+"&api_key=2bbe973ecc284f94d17812d4bb225063&format=json";
     $.get(baseurl+searchTrackUrl, function(dataTracks){
       Trackster.renderTracks(dataTracks);
-      //$('.search__bar').val('');
     });
 };
 
 // Here we take in the list from the API / Filter and create rows and add them to the DOM
 Trackster.PopulateTrackRows = function(trackList) {
-  for (let track of trackList) {
-
-    // listerners attribute values need to be formatted: instead of 1000000, we want 1,000,000.
-    let listeners = numeral(track.listeners).format('0,0');
-
-    // add the new list rows to the DOM
-    $('#track-list').append
-      (`
-        <div class="list-item col-xs-1 col-xs-offset-2"><a href=" ${track.url}" class="far fa-play-circle"></a></div>
-        <div class="list-item col-xs-1">${1}</div>
-        <div class="list-item col-xs-3">${track.name}</div>
-        <div class="list-item col-xs-3">${track.artist}</div>
-        <div class="list-item col-xs-2">${listeners}</div>
-      `);
+  try {
+    if (trackList.length === 0) {
+        console.log('no results');
+        $('#track-list').append(`<div class="col-xs-12 row text-center align-items-center" id="error-search-msg">
+        <h3>No results yet</h3></div>`);
+    }
+    else if(trackList.length !== 0){
+      for (let track of trackList) {
+        // listerners attribute values need to be formatted: instead of 1000000, we want 1,000,000.
+        let listeners = numeral(track.listeners).format('0,0');
+    
+        // add the new list rows to the DOM
+        $('#track-list').append
+          (`
+            <div class="list-item col-xs-1 col-xs-offset-2"><a href=" ${track.url}" class="far fa-play-circle"></a></div>
+            <div class="list-item col-xs-1">${1}</div>
+            <div class="list-item col-xs-3">${track.name}</div>
+            <div class="list-item col-xs-3">${track.artist}</div>
+            <div class="list-item col-xs-2">${listeners}</div>
+          `);
+    } // end for loop
+      let $loadingspinner = $('.fa-spinner').hide();
+      $loadingspinner.hide();
+    } // end if
+    
   }
-  let $loadingspinner = $('.fa-spinner').hide();
-  $loadingspinner.hide();
+  catch (e){
+    console.log(e);
+  }
 }
 
 // The list returned from searchTracksByTitle() is rendered on the page.

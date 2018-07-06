@@ -1,12 +1,23 @@
 /* ********** List ********** */
+
+#error-search-msg{
+    margin: 0 auto;
+    width: 100%;
+    height:100vh;
+    padding-top:40px;
+    background:$text-color-light;
+    text-align:center;
+    top: -5px;
+}
+
 .empty-search-msg {
     margin: 0 auto;
-    width: 90%;
-    height:250px;
-    margin-top:40px;
-    background-color:rgba($tertiary-color, 0.1);
-    border-radius: 19px;
+    width: 100%;
+    height:100vh;
+    padding-top:40px;
+    background:$text-color-light;
     text-align:center;
+    top: -5px;
 }
 
 .empty-search-arrow {
@@ -29,7 +40,10 @@
 
 #track-list{
     color: $text-color;
-    padding: 0 0.95rem;
+    padding: 0;
+    margin: 0;
+    background:$text-color-light;
+
     & .list-item {
         
         padding-bottom:15px;
