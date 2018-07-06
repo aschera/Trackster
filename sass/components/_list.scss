@@ -1,4 +1,22 @@
 /* ********** List ********** */
+.empty-search-msg {
+    margin: 0 auto;
+    width: 90%;
+    height:250px;
+    margin-top:40px;
+    background-color:rgba($tertiary-color, 0.1);
+    border-radius: 19px;
+    text-align:center;
+}
+
+.empty-search-arrow {
+        margin: 0 auto;
+        width: 400px;
+        height:200px;
+        background-color: $main-color;
+        -webkit-clip-path: polygon(13% 67%, 49% 24%, 35% 14%, 72% 14%, 76% 47%, 64% 39%, 27% 79%);
+        clip-path: polygon(13% 67%, 49% 24%, 35% 14%, 72% 14%, 76% 47%, 64% 39%, 27% 79%);
+}
 
 .list-headings {
     background-color: $secondary-color;
@@ -13,7 +31,7 @@
     color: $text-color;
     padding: 0 0.95rem;
     & .list-item {
-        padding-top:15px;
+        
         padding-bottom:15px;
         border-bottom: 1px solid $line-color;
         overflow: hidden;
@@ -24,6 +42,19 @@
     & a {
         color:  #ff00ab;
         font-size:2rem;
+    }
+
+    & .fa-spinner {
+        padding-top: 25vh;
+        margin: 0 auto;
+        font-size: 40px;
+        color:  #ff00ab;
+        display: inline-block;
+
+        & p {
+            padding: 1rem;
+            font-size: 30px;
+        }
     }
 }
 #song-heading,

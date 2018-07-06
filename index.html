@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./resources/js/trackster.js"></script>
-    <script type="text/javascript" src="./resources/js/tests.js"></script>
+    
 </head>
 
 <body>
@@ -25,7 +24,7 @@
             <div class="row"><!-- start row-->
                 <h1 class="col-xs-4 col-md-7 col-xs-offset-1 col-md-offset-1">trackster</h1>
                 <div class="col-xs-3 search">
-                    <input class="search__bar" id="search-input" type="text" placeholder="Watcha looking for?">
+                    <input onkeyup="myFunction()" class="search__bar" id="search-input" type="text" placeholder="Watcha looking for?">
                     <button class="search__button fa fa-search" id="search-button"></button>
                 </div>
             </div><!-- end row-->
@@ -68,6 +67,15 @@
 
             <!-- START track list -->
             <div id="track-list" class="row">
+
+                <div class="col-xs-12 row text-center align-items-center">
+                    <i class="fas fa-spinner col-xs-12"><p>Things are loading ... </p></i>
+                </div>
+                
+                <div class="col-xs-12 empty-search-msg">
+                    <h2>Search something!</h2>
+                    <div class="row empty-search-arrow"></div>
+                </div>
                 
             </div>
             <!-- END track list -->
@@ -80,7 +88,7 @@
 
     </main>
 
-
+<script type="text/javascript" src="./resources/js/trackster.js"></script>
+<script type="text/javascript" src="./resources/js/tests.js"></script>
 </body>
-
 </html>

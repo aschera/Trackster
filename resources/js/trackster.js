@@ -26,11 +26,16 @@ $(document).ready(function(){
   // script to format numbers.
   $.getScript('https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js');
 
+  //loading spinner
+  let $loadingspinner = $('.fa-spinner').hide();
+  $loadingspinner.hide();
+
   //hide the descendant buttons
   $('#sortButton1b').hide();
   $('#sortButton2b').hide();
   $('#sortButton3b').hide();
-
+ 
+ 
   // Filter-buttons
   $('#artist-heading').click(sortByArtist);
   $('#song-heading').click(sortBySong);
@@ -53,12 +58,31 @@ function updateTracklist() {
   Trackster.searchTracksByTitle(query);
 }
 
+
+/* -------------- Automatic search when user stops typing ------------- */
+//setup before functions
+var typingTimer;                //timer identifier
+var doneTypingInterval = 1000;  //time in ms (5 seconds)
+
+function myFunction() {
+  //user is "finished typing," do something
+  const doneTyping = function() {
+    let query = $('#search-input').val();
+    Trackster.searchTracksByTitle(query);
+  }
+      //on keyup, start the countdown
+      clearTimeout(typingTimer);
+      if ($('#search-input').val()) {
+          typingTimer = setTimeout(doneTyping, doneTypingInterval);
+      }
+}
+
 /* -------------------------------------------------------------------------------------- */
 /* -------------------------------------- Trackster-------------------------------------- */
 
 //Holds the Trackster attributes and functions. these are searchTracksByTitle, PopulateTrackRows and renderTracks.
 var Trackster = {
-  list : [],
+  list : [false],
   filter : {
     artist:'ascending', 
     name:'ascending', 
@@ -66,13 +90,18 @@ var Trackster = {
   }
 };
 
+
+
 // input search query is passed to aPI and a list of song titles is returned.
 Trackster.searchTracksByTitle = function(title) {
+  $('.empty-search-msg').hide();
+  let $loadingspinner = $('.fa-spinner').hide();
+  $loadingspinner.show();
   let baseurl= 'http://ws.audioscrobbler.com/';
   let searchTrackUrl = "/2.0/?method=track.search&track="+title+"&api_key=2bbe973ecc284f94d17812d4bb225063&format=json";
     $.get(baseurl+searchTrackUrl, function(dataTracks){
       Trackster.renderTracks(dataTracks);
-      $('.search__bar').val('');
+      //$('.search__bar').val('');
     });
 };
 
@@ -93,6 +122,8 @@ Trackster.PopulateTrackRows = function(trackList) {
         <div class="list-item col-xs-2">${listeners}</div>
       `);
   }
+  let $loadingspinner = $('.fa-spinner').hide();
+  $loadingspinner.hide();
 }
 
 // The list returned from searchTracksByTitle() is rendered on the page.
@@ -111,14 +142,14 @@ function sortByPopularity() {
   if(Trackster.filter.listeners ==='ascending'){
     var $t = list.sort((a, b) => a.listeners - b.listeners); // For ascending sort
     Trackster.filter.listeners = 'descending';
-    $('#sortButton3a').show();
-    $('#sortButton3b').hide();
+    $('#sortButton3b').show();
+    $('#sortButton3a').hide();
   }
   else if (Trackster.filter.listeners ==='descending'){
     var $t = list.sort((a, b) => b.listeners - a.listeners); // For descending sort  
     Trackster.filter.listeners = 'ascending';
-    $('#sortButton3b').show();
-    $('#sortButton3a').hide();
+    $('#sortButton3a').show();
+    $('#sortButton3b').hide();
   }
   Trackster.list = $t; // add newly sorted list to the current list.
   $('#track-list').empty(); // empty the DOM list items.
@@ -166,10 +197,3 @@ function sortByArtist() {
   $('#track-list').empty(); // empty the DOM list items.
   Trackster.PopulateTrackRows(Trackster.list);
 }
-
-
-
-
-
-
-
