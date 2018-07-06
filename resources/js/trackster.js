@@ -1,5 +1,5 @@
 
-
+/* -------------------------------------- API info -------------------------------------- */
 /*last.fm developer api
 https://www.last.fm/api
 
@@ -17,271 +17,159 @@ JSON: /2.0/?method=album.search&album=believe&api_key=YOUR_API_KEY&format=json
 XML: /2.0/?method=album.search&album=believe&api_key=YOUR_API_KEY
 */
 
-// Variables
-var list;
-var Trackster = {};
-var filter = {artist:'ascending', name:'ascending', listeners:'ascending'}
-
-// ******************************************************************* //
+/* -------------------------------------------------------------------------------------- */
+/* ------------------------- Document is ready - event listeners ---------- ------------- */
 
 /* run the click event only if the page has loaded*/
 $(document).ready(function(){
+
+  // script to format numbers.
   $.getScript('https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js');
-  
-  $('#search-button').click(clicked);
 
-  $('#search-input').keypress(function (e) {
-    if (e.which == 13) {
-      clicked();
-      return false;    
-      //"return false" is the same as calling e.preventDefault and e.stopPropagation().
-    }
-  });
+  //hide the descendant buttons
+  $('#sortButton1b').hide();
+  $('#sortButton2b').hide();
+  $('#sortButton3b').hide();
 
-//hid the descendant buttons
-$('#sortButton1b').hide();
-$('#sortButton2b').hide();
-$('#sortButton3b').hide();
-
-
-
-//$( "#foo" ).toggle( display );
+  // Filter-buttons
   $('#artist-heading').click(sortByArtist);
   $('#song-heading').click(sortBySong);
   $('#popularity-heading').click(sortByPopularity);
+
+  // search button
+  $('#search-button').click(updateTracklist);
+
+  // Search input field. Search on ENTER.
+  $('#search-input').keypress(function (e) {
+    if (e.which == 13) {
+      updateTracklist();
+    }
+  });
 });
 
-// ******************************************************************* //
-
-/* do something when a user clicks the button*/
-function clicked() {
+/* searches API when a user clicks the search-button*/
+function updateTracklist() {
   let query = $('.search__bar').val();
   Trackster.searchTracksByTitle(query);
 }
-// ******************************************************************* //
 
-/* filter popularity */
-function sortByPopularity() {
-  if(filter.listeners ==='ascending'){
-    var $t = list.sort((a, b) => a.listeners - b.listeners); // For ascending sort
-    filter.listeners = 'descending';
-    $('#sortButton3a').show();
-    $('#sortButton3b').hide();
-  }
-  else if (filter.listeners ==='descending'){
-    var $t = list.sort((a, b) => b.listeners - a.listeners); // For descending sort  
-    filter.listeners = 'ascending';
-    $('#sortButton3b').show();
-    $('#sortButton3a').hide();
-  }
-  list = $t; // add newly sorted list to the current list.
-  $('#track-list').empty(); // empty the DOM list items.
-  
-  for(let i = 0; i < $t.length; i++){
-    var string = numeral($t[i].listeners).format('0,0');
-  $('#track-list').append
-    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
-    +
-    $t[i].url
-    +
-    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
-    +
-    '1'
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    $t[i].name
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    $t[i].artist
-    +
-    '</div><div class="list-item col-xs-2">'
-    +
-    string
-    +
-    '</div></div>');
-  }
-}
-// ******************************************************************* //
+/* -------------------------------------------------------------------------------------- */
+/* -------------------------------------- Trackster-------------------------------------- */
 
-/* filter songs */
-function sortBySong() {
-  if(filter.name ==='ascending'){
-    var $t = list.sort((a, b) => a.name.localeCompare(b.name));
-    filter.name = 'descending';
-    $('#sortButton1b').show();
-    $('#sortButton1a').hide();
-  }
-  else if (filter.name ==='descending'){
-    var $t = list.sort((a, b) => b.name.localeCompare(a.name));
-    filter.name = 'ascending';
-    $('#sortButton1a').show();
-    $('#sortButton1b').hide();
-  }
-  list = $t; // add newly sorted list to the current list.
-  $('#track-list').empty(); // empty the DOM list items.
-  
-  for(let i = 0; i < $t.length; i++){
-    var string = numeral($t[i].listeners).format('0,0');
-  $('#track-list').append
-    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
-    +
-    $t[i].url
-    +
-    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
-    +
-    '1'
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    $t[i].name
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    $t[i].artist
-    +
-    '</div><div class="list-item col-xs-2">'
-    +
-    string
-    +
-    '</div></div>');
-  }
-}
-
-// ******************************************************************* //
-/* filter Artist */
-function sortByArtist() {
-  if(filter.artist ==='ascending'){
-    var $t = list.sort((a, b) => a.artist.localeCompare(b.artist));
-    filter.artist = 'descending';
-    $('#sortButton2b').show();
-    $('#sortButton2a').hide();
-  }
-  else if (filter.artist ==='descending'){
-    var $t = list.sort((a, b) => b.artist.localeCompare(a.artist));
-    filter.artist = 'ascending';
-    $('#sortButton2a').show();
-    $('#sortButton2b').hide();
-  }
-  list = $t; // add newly sorted list to the current list.
-  $('#track-list').empty(); // empty the DOM list items.
-  
-  for(let i = 0; i < $t.length; i++){
-    var string = numeral($t[i].listeners).format('0,0');
-  $('#track-list').append
-    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
-    +
-    $t[i].url
-    +
-    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
-    +
-    '1'
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    $t[i].name
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    $t[i].artist
-    +
-    '</div><div class="list-item col-xs-2">'
-    +
-    string
-    +
-    '</div></div>');
-  }
-}
-// ******************************************************************* //
-
-/*
-  Given an array of track data, create the HTML for a Bootstrap row for each.
-  Append each "row" to the container in the body to display all tracks. 
-*/
-Trackster.renderTracks = function(tracks) {
-  list = tracks.results.trackmatches.track;
-  $('#track-list').empty();
-  
-
-  for(let i = 0; i < list.length; i++){
-    var string = numeral(list[i].listeners).format('0,0');
-
-    $('#track-list').append
-    ('<div class="list-item  col-xs-1 col-xs-offset-2"><a href="'
-    +
-    list[i].url
-    +
-    '" class="far fa-play-circle"></a></div><div class="list-item  col-xs-1">'
-    +
-    '1'
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    list[i].name
-    +
-    '</div><div class="list-item col-xs-3">'
-    +
-    list[i].artist
-    +
-    '</div><div class="list-item col-xs-2">'
-    +
-    string
-    +
-    '</div></div>');
+//Holds the Trackster attributes and functions. these are searchTracksByTitle, PopulateTrackRows and renderTracks.
+var Trackster = {
+  list : [],
+  filter : {
+    artist:'ascending', 
+    name:'ascending', 
+    listeners:'ascending'
   }
 };
 
-/*
-  Given a search term as a string, query the LastFM API.
-  Render the tracks given in the API query response.
-*/
+// input search query is passed to aPI and a list of song titles is returned.
 Trackster.searchTracksByTitle = function(title) {
   let baseurl= 'http://ws.audioscrobbler.com/';
   let searchTrackUrl = "/2.0/?method=track.search&track="+title+"&api_key=2bbe973ecc284f94d17812d4bb225063&format=json";
-
     $.get(baseurl+searchTrackUrl, function(dataTracks){
       Trackster.renderTracks(dataTracks);
       $('.search__bar').val('');
     });
 };
 
+// Here we take in the list from the API / Filter and create rows and add them to the DOM
+Trackster.PopulateTrackRows = function(trackList) {
+  for (let track of trackList) {
 
+    // listerners attribute values need to be formatted: instead of 1000000, we want 1,000,000.
+    let listeners = numeral(track.listeners).format('0,0');
 
+    // add the new list rows to the DOM
+    $('#track-list').append
+      (`
+        <div class="list-item col-xs-1 col-xs-offset-2"><a href=" ${track.url}" class="far fa-play-circle"></a></div>
+        <div class="list-item col-xs-1">${1}</div>
+        <div class="list-item col-xs-3">${track.name}</div>
+        <div class="list-item col-xs-3">${track.artist}</div>
+        <div class="list-item col-xs-2">${listeners}</div>
+      `);
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* chaining ajax calls */
-Trackster.searchMany = function(query) {
-    $.when(
-      $.ajax("/some/page"),
-      $.ajax("/some/other-page"),
-      $.ajax("/some/other-other-page"),
-      $.ajax("/and/so/on")
-      )
-      .done(function(first_call, second_call, third_call, fourth_call){
-          //we're good to go - do something
-      })
-      .fail(function(){
-          //ruh roh - bail out!
-    });
+// The list returned from searchTracksByTitle() is rendered on the page.
+Trackster.renderTracks = function(tracks) {
+  Trackster.list = tracks.results.trackmatches.track;
+  $('#track-list').empty();
+  Trackster.PopulateTrackRows(Trackster.list);
 };
+/* -------------------------------------------------------------------------------------- */
+/* -------------------------------------- Filters --------------------------------------- */
+
+/* filter popularity */
+function sortByPopularity() {
+  let list = Trackster.list;
+
+  if(Trackster.filter.listeners ==='ascending'){
+    var $t = list.sort((a, b) => a.listeners - b.listeners); // For ascending sort
+    Trackster.filter.listeners = 'descending';
+    $('#sortButton3a').show();
+    $('#sortButton3b').hide();
+  }
+  else if (Trackster.filter.listeners ==='descending'){
+    var $t = list.sort((a, b) => b.listeners - a.listeners); // For descending sort  
+    Trackster.filter.listeners = 'ascending';
+    $('#sortButton3b').show();
+    $('#sortButton3a').hide();
+  }
+  Trackster.list = $t; // add newly sorted list to the current list.
+  $('#track-list').empty(); // empty the DOM list items.
+  Trackster.PopulateTrackRows(Trackster.list);
+}
+
+/* filter songs */
+function sortBySong() {
+  let list = Trackster.list;
+
+  if(Trackster.filter.name ==='ascending'){
+    var $t = list.sort((a, b) => a.name.localeCompare(b.name));
+    Trackster.filter.name = 'descending';
+    $('#sortButton1b').show();
+    $('#sortButton1a').hide();
+  }
+  else if (Trackster.filter.name ==='descending'){
+    var $t = list.sort((a, b) => b.name.localeCompare(a.name));
+    Trackster.filter.name = 'ascending';
+    $('#sortButton1a').show();
+    $('#sortButton1b').hide();
+  }
+  Trackster.list = $t; // add newly sorted list to the current list.
+  $('#track-list').empty(); // empty the DOM list items.
+  Trackster.PopulateTrackRows(Trackster.list);
+}
+
+/* filter Artist */
+function sortByArtist() {
+  let list = Trackster.list;
+
+  if(Trackster.filter.artist ==='ascending'){
+    var $t = list.sort((a, b) => a.artist.localeCompare(b.artist));
+    Trackster.filter.artist = 'descending';
+    $('#sortButton2b').show();
+    $('#sortButton2a').hide();
+  }
+  else if (Trackster.filter.artist ==='descending'){
+    var $t = list.sort((a, b) => b.artist.localeCompare(a.artist));
+    Trackster.filter.artist = 'ascending';
+    $('#sortButton2a').show();
+    $('#sortButton2b').hide();
+  }
+  Trackster.list = $t; // add newly sorted list to the current list.
+  $('#track-list').empty(); // empty the DOM list items.
+  Trackster.PopulateTrackRows(Trackster.list);
+}
+
+
+
+
+
+
+
