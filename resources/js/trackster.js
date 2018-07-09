@@ -46,6 +46,8 @@ $(document).ready(function(){
   // search button
   $('#search-button').click(updateTracklist);
 
+ 
+
   // Search input field. Search on ENTER.
   $('#search-input').keypress(function (e) {
     if (e.which == 13) {
@@ -154,7 +156,15 @@ Trackster.renderTracks = function(tracks) {
   Trackster.list = tracks.results.trackmatches.track;
   $('#track-list').empty();
   Trackster.PopulateTrackRows(Trackster.list);
+  $("#search-label").html('Results: ' + Trackster.list.length);
+  $("#search-label").css('opacity', 1);
 };
+
+
+
+
+
+
 /* -------------------------------------------------------------------------------------- */
 /* -------------------------------------- Filters --------------------------------------- */
 
