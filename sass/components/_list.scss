@@ -45,7 +45,7 @@
     background:$text-color-light;
 
     & .list-item {
-        
+        white-space: nowrap;
         padding-bottom:15px;
         border-bottom: 1px solid $line-color;
         overflow: hidden;
@@ -53,6 +53,14 @@
         line-height: 2rem;
         display: inline-block;
     }
+    & .track-row:hover {
+        cursor:pointer;
+        & .list-item {
+            background-color: $line-color;
+
+        }
+    }
+
     & a {
         color:  #ff00ab;
         font-size:2rem;
@@ -94,3 +102,19 @@
         float:left;
         display: inline;
 }
+
+
+ /* ********************************************************************** */
+ @media only screen and (max-width: 767px){
+    #track-list{
+        & .list-item {
+            padding-bottom:5px;
+            height: 3rem;
+        }
+        & a {
+            padding-top:5px;
+            font-size:1.6rem;
+        }
+    }
+}
+/* ********************************************************************** */

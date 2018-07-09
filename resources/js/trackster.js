@@ -97,7 +97,7 @@ Trackster.searchTracksByTitle = function(title) {
   $('.empty-search-msg').hide();
   $('.fa-spinner').show();
 
-  let baseurl= 'http://ws.audioscrobbler.com/';
+  let baseurl= 'https://ws.audioscrobbler.com/';
   let searchTrackUrl = "/2.0/?method=track.search&track="+title+"&api_key=2bbe973ecc284f94d17812d4bb225063&format=json";
     $.get(baseurl+searchTrackUrl, function(dataTracks){
       Trackster.renderTracks(dataTracks);
@@ -119,12 +119,24 @@ Trackster.PopulateTrackRows = function(trackList) {
     
         // add the new list rows to the DOM
         $('#track-list').append
-          (`
-            <div class="list-item col-xs-1 col-xs-offset-2"><a href=" ${track.url}" class="far fa-play-circle"></a></div>
-            <div class="list-item col-xs-1">${1}</div>
-            <div class="list-item col-xs-3">${track.name}</div>
-            <div class="list-item col-xs-3">${track.artist}</div>
-            <div class="list-item col-xs-2">${listeners}</div>
+          (`<div class="track-row">
+              <div class="list-item 
+              col-xs-1
+              col-sm-1 col-sm-offset-2">
+              <a href=" ${track.url}" class="far fa-play-circle"></a></div>
+
+              <div class="list-item 
+              col-xs-4
+              col-sm-3">${track.name}</div>
+
+              <div class="list-item 
+              col-xs-4
+              col-sm-3">${track.artist}</div>
+
+              <div class="list-item 
+              col-xs-3
+              col-sm-3">${listeners}</div>
+            </div>
           `);
     } // end for loop
       let $loadingspinner = $('.fa-spinner').hide();
