@@ -83,10 +83,11 @@ p {
   color: #4a4a4a;
   padding: 0;
   margin: 0;
+  padding-top: 1rem;
   background: white; }
   #track-list .list-item {
     white-space: nowrap;
-    padding-bottom: 15px;
+    padding: 15px;
     border-bottom: 1px solid #cccccc;
     overflow: hidden;
     height: 3.5rem;
@@ -98,7 +99,8 @@ p {
       background-color: #cccccc; }
   #track-list a {
     color: #ff00ab;
-    font-size: 2rem; }
+    font-size: 2rem;
+    text-decoration: none; }
   #track-list .fa-spinner {
     padding-top: 25vh;
     margin: 0 auto;
@@ -170,6 +172,7 @@ p {
   font-size: 10pt;
   float: left;
   padding-left: 15px;
+  margin-left: 15px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px; }
@@ -215,14 +218,13 @@ p {
 #search-label {
   opacity: 0;
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  bottom: 0.5rem;
+  top: 25px;
+  right: 45%;
   z-index: 999;
   display: inline;
   border: 1px solid #22013f;
-  padding: .4rem;
-  color: #22013f;
+  padding: .2rem;
+  color: white;
   border-radius: 19px; }
 
 .container-4:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon {
